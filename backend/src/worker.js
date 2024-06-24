@@ -5,6 +5,12 @@ const NotificationService = require('./services/NotificationService');
 
 const sqs = new AWS.SQS({ apiVersion: '2012-11-05' });
 
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION
+})
+
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const processMessage = async (message) => {
